@@ -1,10 +1,16 @@
 const app = Vue.createApp({
     data() {
         return {
+            url: 'http://www/thenetninja.co.uk',
             showBooks: true,
-           title: 'The Final Empire',
-           author: 'Brandon',
-           age: 45
+           books: [
+            {title: 'name of the wind', author: 'patrick rothfuss', isFav: true},
+            {title: '2', author: '2', isFav: false},
+            {title: '3', author: '3', isFav: true}
+           ],
+           age: 45,
+           x: 0,
+           y: 0
         }
     },
     methods: {
@@ -13,6 +19,24 @@ const app = Vue.createApp({
         },
         toggleShowBooks(){
             this.showBooks = !this.showBooks
+        },
+        handleEvent(e, data) {
+            console.log(e)
+            if (data){
+                console.log(data)
+            }
+        },
+        handleMousemove(e){
+            this.x = e.offsetX
+            this.y = e.offsetY
+        },
+        toggleFav(book){
+            book.isFav = !book.isFav;
+        }
+    },
+    computed: {
+        filteredBooks(){
+            return this.books.filter((book) => book.isFav)
         }
     }
 })
